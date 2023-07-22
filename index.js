@@ -9,10 +9,10 @@ if (!breedName) {
     if (error) {
       console.log('Error fetch details:', error);
     } else {
-      if (data.length === 0) {
+      if (!data) {
         console.log(`Breed "${breedName}" not found.`);
       } else {
-        console.log(data[0].description);
+        console.log(data);
       }
     }
   });

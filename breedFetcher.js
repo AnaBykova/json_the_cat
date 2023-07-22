@@ -1,15 +1,5 @@
 const request = require('request');
 
-/* make sure that 1 line of code works.
-request('https://www.example.com', (error, response, body) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log(body);
-  }
-});
-*/
-
 const fetchBreedDescription = (breedName, callback) => {
   const url = `https://api.thecatapi.com/v1/breeds/search?q=${breedName}`;
 
@@ -18,12 +8,14 @@ const fetchBreedDescription = (breedName, callback) => {
       callback(error, null);
     } else {
       const data = JSON.parse(body);
-      callback(null, data);
+      //console.log("API Response Data:", data); // Debugging statement
+      if (data.length === 0) {
+        callback(`Breed "${breedName}" not found.`, null);
+      } else {
+        callback(null, data[0].description);
+      }
     }
   });
 };
-
-// Usage example:
-
 
 module.exports = { fetchBreedDescription };
