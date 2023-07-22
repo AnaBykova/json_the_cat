@@ -24,15 +24,20 @@ const fetchBreedData = (breedName, callback) => {
 };
 
 // Usage example:
-const breedName = 'Siberian';
-fetchBreedData(breedName, (error, data) => {
-  if (error) {
-    console.log('Error:', error);
-  } else {
-    if (data.length === 0) {
-      console.log(`Breed "${breedName}" not found.`);
+const breedName = process.argv[2];
+
+if (!breedName) {
+  console.log("Please provide a breed name as a command-line argument.");
+} else {
+  fetchBreedData(breedName, (error, data) => {
+    if (error) {
+      console.log('Error:', error);
     } else {
-      console.log('Breed data:', data[0]);
+      if (data.length === 0) {
+        console.log(`Breed "${breedName}" not found.`);
+      } else {
+        console.log(data[0].description);
+      }
     }
-  }
-});
+  });
+}
