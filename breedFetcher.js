@@ -10,7 +10,7 @@ request('https://www.example.com', (error, response, body) => {
 });
 */
 
-const fetchBreedData = (breedName, callback) => {
+const fetchBreedDescription = (breedName, callback) => {
   const url = `https://api.thecatapi.com/v1/breeds/search?q=${breedName}`;
 
   request(url, (error, response, body) => {
@@ -24,20 +24,6 @@ const fetchBreedData = (breedName, callback) => {
 };
 
 // Usage example:
-const breedName = process.argv[2];
 
-if (!breedName) {
-  console.log("Please provide a breed name as a command-line argument.");
-} else {
-  fetchBreedData(breedName, (error, data) => {
-    if (error) {
-      console.log('Error:', error);
-    } else {
-      if (data.length === 0) {
-        console.log(`Breed "${breedName}" not found.`);
-      } else {
-        console.log(data[0].description);
-      }
-    }
-  });
-}
+
+module.exports = { fetchBreedDescription };
